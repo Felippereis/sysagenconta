@@ -63,3 +63,34 @@ function displayResult(imc) {
 
     resultElement.innerHTML = 'Seu IMC é: ' + imc.toFixed(2) + '<br>' + 'Classificação: ' + resultMessage;
 }
+
+function calculateCost() {
+    /*
+    const distance = parseFloat(document.getElementById('distance').value);
+    const consumption = parseFloat(document.getElementById('consumption').value);
+    const price = parseFloat(document.getElementById('price').value);
+    */
+    const distanceInput = document.getElementById('distance');
+    const consumptionInput = document.getElementById('consumption');
+    const priceInput = document.getElementById('price');
+
+    const distance = parseFloat(distanceInput.value);
+    const consumption = parseFloat(consumptionInput.value);
+    const price = parseFloat(priceInput.value);
+
+    
+
+    if (!isNaN(distance) && !isNaN(consumption) && !isNaN(price)) {
+        const cost = (distance / consumption) * price;
+        const resultElement = document.getElementById('resultgas');
+        resultElement.textContent = `O custo total de gasolina é: R$ ${cost.toFixed(2)}`;
+       // Zera os campos de entrada após o cálculo
+       distanceInput.value = '';
+       priceInput.value = '';
+       consumptionInput.value = '';
+        
+    } else {
+        alert('Por favor, preencha todos os campos com valores válidos.');
+    }
+       
+}

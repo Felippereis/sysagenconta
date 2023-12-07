@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Custo de Gasolina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #calculator {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="calculator">
+        <h2>Calculadora de Custo de Gasolina</h2>
+        <label for="distance">Distância percorrida (km):</label>
+        <input type="number" id="distance" placeholder="Digite a distância">
+
+        <label for="consumption">Consumo de gasolina (km/l):</label>
+        <input type="number" id="consumption" placeholder="Digite o consumo de gasolina">
+
+        <label for="price">Preço da gasolina por litro (R$):</label>
+        <input type="number" id="price" placeholder="Digite o preço da gasolina">
+
+        <button onclick="calculateCost()">Calcular Custo</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateCost() {
+            const distanceInput = document.getElementById('distance');
+            const consumptionInput = document.getElementById('consumption');
+            const priceInput = document.getElementById('price');
+
+            const distance = parseFloat(distanceInput.value);
+            const consumption = parseFloat(consumptionInput.value);
+            const price = parseFloat(priceInput.value);
+
+            if (!isNaN(distance) && !isNaN(consumption) && !isNaN(price)) {
+                const cost = (distance / consumption) * price;
+                const resultElement = document.getElementById('result');
+                resultElement.textContent = `O custo total de gasolina é: R$ ${cost.toFixed(2)}`;
+
+                // Zera os campos de entrada após o cálculo
+                distanceInput.value = '';
+                consumptionInput.value = '';
+                priceInput.value = '';
+            } else {
+                alert('Por favor, preencha todos os campos com valores válidos.');
+            }
+        }
+    </script>
+
+</body>
+</html>
