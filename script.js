@@ -26,7 +26,7 @@ let expenses = [];
 
         function calculateTotal() {
             const total = expenses.reduce((acc, expense) => acc + expense, 0);
-            const resultElement = document.getElementById('result');
+            const resultElement = document.getElementById('resultado');
             resultElement.textContent = `Total: R$ ${total.toFixed(2)}`;
         }
 
