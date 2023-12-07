@@ -1,32 +1,37 @@
 let expenses = [];
 
-        function addExpense() {
-            const expenseInput = document.getElementById('expense');
-            const expenseValue = parseFloat(expenseInput.value);
+function addExpense() {
+    const expenseNameInput = document.getElementById('expenseName');
+    const expenseAmountInput = document.getElementById('expenseAmount');
 
-            if (!isNaN(expenseValue)) {
-                expenses.push(expenseValue);
-                updateExpenseList();
-                calculateTotal();
-            }
+    const expenseName = expenseNameInput.value.trim();
+    const expenseAmount = parseFloat(expenseAmountInput.value);
 
-            expenseInput.value = '';
-        }
+    if (expenseName !== '' && !isNaN(expenseAmount)) {
+        const expense = { name: expenseName, amount: expenseAmount };
+        expenses.push(expense);
+        updateExpenseList();
+        calculateTotal();
+    }
 
-        function updateExpenseList() {
-            const expenseListElement = document.getElementById('expenseList');
-            expenseListElement.innerHTML = '';
-            
-            expenses.forEach(expense => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `R$ ${expense.toFixed(2)}`;
-                expenseListElement.appendChild(listItem);
-            });
-        }
+    expenseNameInput.value = '';
+    expenseAmountInput.value = '';
+}
+
+function updateExpenseList() {
+    const expenseListElement = document.getElementById('expenseList');
+    expenseListElement.innerHTML = '';
+    
+    expenses.forEach(expense => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${expense.name}: R$ ${expense.amount.toFixed(2)}`;
+        expenseListElement.appendChild(listItem);
+    });
+}
 
         function calculateTotal() {
-            const total = expenses.reduce((acc, expense) => acc + expense, 0);
-            const resultElement = document.getElementById('result');
+            const total = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+            const resultElement = document.getElementById('resultado');
             resultElement.textContent = `Total: R$ ${total.toFixed(2)}`;
         }
 
